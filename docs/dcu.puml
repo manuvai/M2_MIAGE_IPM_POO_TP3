@@ -1,0 +1,20 @@
+@startuml
+
+!includeurl https://raw.githubusercontent.com/manuvai/plantuml-utils/master/usecase_diagram_utils.puml
+
+actor Joueur as user
+
+rectangle Jeu {
+    
+    usecase("Jouer une grille", play)
+    usecase("Miser", bet)
+    usecase("Connaître score", getScore)
+}
+
+user -right-> play
+play -up-> bet : <<include>>
+user -right-> getScore
+
+play .[hidden]down. getScore
+
+@enduml

@@ -1,0 +1,37 @@
+@startuml
+
+!includeurl https://raw.githubusercontent.com/manuvai/plantuml-utils/master/class_diagram_utils.puml
+
+class Grille {
+    -member("String[4]", nombres)
+}
+
+class MiseTolo {
+    -int(code)
+    -int(mise)
+}
+
+class MiseSuperTolo {
+    -int(numeroChance)
+
+}
+
+class Tolo {
+    +int("obtenirGain(MiseTolo)")
+}
+
+class SuperTolo {
+    -int(numeroChance)
+    +int("obtenirGain(MiseSuperTolo)")
+}
+
+extends(SuperTolo, Tolo, up)
+extends(MiseSuperTolo, MiseTolo, up)
+
+MiseTolo *-- Grille : numerosChoisis
+
+Tolo *-- Grille : numerosGagnants
+
+Tolo o-- MiseTolo : mises
+
+@enduml
