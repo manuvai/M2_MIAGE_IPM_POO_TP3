@@ -7,12 +7,14 @@ actor Joueur as user
 rectangle Jeu {
     
     usecase("Jouer une grille", play)
+    usecase("Choisir un type de jeu", choose)
     usecase("Miser", bet)
     usecase("Connaître score", getScore)
 }
 
 user -right-> play
-play -up-> bet : <<include>>
+play .up.> bet : <<include>>
+play .up.> choose : <<include>>
 user -right-> getScore
 
 play .[hidden]down. getScore
