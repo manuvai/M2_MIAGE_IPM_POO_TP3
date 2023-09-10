@@ -1,0 +1,12 @@
+@startuml
+
+hide footbox
+
+
+participant Jeu as app
+
+app -> app ++: Tirage au sort
+
+return
+
+@enduml

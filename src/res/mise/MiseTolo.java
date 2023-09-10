@@ -1,6 +1,6 @@
 package res.mise;
 
-import res.Grille;
+import res.grille.Grille;
 
 public class MiseTolo {
     protected int code;

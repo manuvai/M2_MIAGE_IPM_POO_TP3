@@ -1,0 +1,11 @@
+@startuml
+
+hide footbox
+
+participant Jeu as app
+
+[-> app ++: Création de jeu
+
+return
+
+@enduml

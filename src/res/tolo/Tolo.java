@@ -1,6 +1,6 @@
 package res.tolo;
 
-import res.Grille;
+import res.grille.Grille;
 import res.mise.MiseTolo;
 import res.exceptions.NoStackTraceRuntimeException;
 
@@ -11,6 +11,14 @@ import java.util.Objects;
 public class Tolo {
     private Grille numerosGagnants;
     private List<MiseTolo> mises = new ArrayList<>();
+
+    public Tolo(Grille inNumerosGagnants) {
+        numerosGagnants = inNumerosGagnants;
+    }
+
+    public Grille getNumerosGagnants() {
+        return numerosGagnants;
+    }
 
     public void ajouterMise(MiseTolo miseTolo) {
         if (Objects.nonNull(miseTolo)) {

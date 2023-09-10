@@ -1,0 +1,13 @@
+@startuml
+
+hide footbox
+
+
+actor Joueur as user
+participant Jeu as app
+
+user -> app ++: Parier en remplissant des grilles
+
+return
+
+@enduml

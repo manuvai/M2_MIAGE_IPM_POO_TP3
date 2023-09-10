@@ -1,6 +1,6 @@
 package res.exceptions;
 
-import res.Grille;
+import res.grille.Grille;
 
 import java.text.MessageFormat;
 
