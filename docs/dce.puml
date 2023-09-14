@@ -3,35 +3,31 @@
 !includeurl https://raw.githubusercontent.com/manuvai/plantuml-utils/master/class_diagram_utils.puml
 
 class Grille {
-    -member("String[4]", nombres)
+    #int(code)
+    #float(mise)
+    #member("int[4]", nombresMises)
 }
 
-class MiseTolo {
-    -int(code)
-    -int(mise)
-}
-
-class MiseSuperTolo {
+class SuperGrille {
     -int(numeroChance)
 
 }
 
 class Tolo {
-    +int("obtenirGain(MiseTolo)")
+    #member("int[4]", numerosTires)
+    +void("effectuerTirage()")
+    +int("obtenirGain(Grille)")
 }
 
 class SuperTolo {
     -int(numeroChance)
-    +int("obtenirGain(MiseSuperTolo)")
+    +void("effectuerTirage()")
+    +int("obtenirGain(SuperGrille)")
 }
 
 extends(SuperTolo, Tolo, up)
-extends(MiseSuperTolo, MiseTolo, up)
+extends(SuperGrille, Grille, up)
 
-MiseTolo *-- Grille : numerosChoisis
-
-Tolo *-- Grille : numerosGagnants
-
-Tolo o-- MiseTolo : mises
+Tolo *-right- "0..*" Grille : list(Grille, grillesJouees)
 
 @enduml

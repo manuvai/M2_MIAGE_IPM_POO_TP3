@@ -3,13 +3,15 @@
 !includeurl https://raw.githubusercontent.com/manuvai/plantuml-utils/master/usecase_diagram_utils.puml
 
 actor Joueur as user
+actor Admin as admin
 
 rectangle Jeu {
     
-    usecase("Jouer une grille", play)
+    usecase("Jouer une res.grille", play)
     usecase("Choisir un type de jeu", choose)
     usecase("Miser", bet)
     usecase("Connaître score", getScore)
+    usecase("Organiser tirage", organize)
 }
 
 user -right-> play
@@ -17,6 +19,9 @@ play .up.> bet : <<include>>
 play .up.> choose : <<include>>
 user -right-> getScore
 
+admin -> organize
+
 play .[hidden]down. getScore
+getScore .[hidden]down. organize
 
 @enduml

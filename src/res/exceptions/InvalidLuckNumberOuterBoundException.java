@@ -1,6 +1,6 @@
 package res.exceptions;
 
-import res.mise.MiseSuperTolo;
+import res.tolo.SuperTolo;
 
 import java.text.MessageFormat;
 
@@ -9,7 +9,7 @@ public class InvalidLuckNumberOuterBoundException extends NoStackTraceRuntimeExc
     public InvalidLuckNumberOuterBoundException() {
         super(MessageFormat.format(
                 "Le numéro chance doit être compris entre {0} et {1}",
-                MiseSuperTolo.LOWER_LUCK_NUMBER,
-                MiseSuperTolo.UPPER_LUCK_NUMBER));
+                SuperTolo.LOWER_LUCK_NUMBER,
+                SuperTolo.UPPER_LUCK_NUMBER));
     }
 }
