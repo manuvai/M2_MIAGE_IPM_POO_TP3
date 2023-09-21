@@ -1,7 +1,9 @@
 package res.tolo;
 
+import res.exceptions.InvalidEntryException;
 import res.exceptions.NoStackTraceRuntimeException;
 import res.grille.Grille;
+import res.validator.GrilleValidator;
 import utils.NumberUtils;
 
 import java.util.ArrayList;
@@ -10,14 +12,27 @@ import java.util.Objects;
 
 public class Tolo {
     public static final int PERMITTED_NUMBERS = 4;
-    public static final int UPPER_BOUND = 4;
+    public static final int UPPER_BOUND = 20;
     public static final int LOWER_BOUND = 1;
     protected int[] numerosTires;
 
     protected List<Grille> grillesJouees = new ArrayList<>();
 
+    private GrilleValidator grilleValidator = new GrilleValidator();
+
     public void effectuerTirage() {
-        numerosTires = generateRandomNumbers();
+        setNumerosTires(generateRandomNumbers());
+    }
+
+    public void setNumerosTires(int[] inNumerosTires) {
+
+        if (Objects.isNull(inNumerosTires)) {
+            throw new InvalidEntryException();
+        }
+
+        grilleValidator.checkEntry(inNumerosTires);
+
+        numerosTires = inNumerosTires;
     }
 
     public float obtenirGain(int codeGrille) {
@@ -27,17 +42,6 @@ public class Tolo {
                 ? 0
                 : obtenirGain(grilleJouee);
 
-    }
-
-    protected Grille rechercherGrilleJouee(int codeGrille) {
-        return grillesJouees.stream()
-                .filter(grille -> codeGrille == grille.getCode())
-                .findFirst()
-                .orElse(null);
-    }
-
-    public void ajouterGrille(Grille grille) {
-        grillesJouees.add(grille);
     }
 
     public float obtenirGain(Grille grille) {
@@ -57,6 +61,20 @@ public class Tolo {
         }
 
         return gain;
+    }
+
+    protected Grille rechercherGrilleJouee(int codeGrille) {
+        return grillesJouees.stream()
+                .filter(grille -> codeGrille == grille.getCode())
+                .findFirst()
+                .orElse(null);
+    }
+
+    public void ajouterGrille(Grille grille) {
+        if (Objects.nonNull(grille)) {
+            grillesJouees.add(grille);
+
+        }
     }
 
     private float getCalculatedGain(float mise, int correspondingNumbers) {

@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import res.exceptions.InvalidLuckNumberOuterBoundException;
 import res.grille.SuperGrille;
-import tests.mocks.SuperGrilleMock;
 
 public class SuperGrilleTest {
 

@@ -6,27 +6,63 @@ class Grille {
     #int(code)
     #float(mise)
     #member("int[4]", nombresMises)
+    -void("setNombresMises(int[])")
+    +float("getMise()")
+    +member("int[]", "getNombresMises()")
+    +int("getCode()")
+}
+
+class GrilleValidator {
+    +void("checkEntry(int[])")
 }
 
 class SuperGrille {
     -int(numeroChance)
+    -void("setNumeroChance(int)")
+    +int("getNumeroChance()")
+}
+
+class SuperGrilleValidator {
+    +void("checkNumeroChance(int)")
 
 }
 
 class Tolo {
+    +{static} int(PERMITTED_NUMBER)
+    +{static} int(UPPER_BOUND)
+    +{static} int(LOWER_BOUND)
     #member("int[4]", numerosTires)
+
     +void("effectuerTirage()")
-    +int("obtenirGain(Grille)")
+    +void("setNumerosTires(int[])")
+    +void("ajouterGrille(Grille)")
+    +float("obtenirGain(int)")
+    +float("obtenirGain(Grille)")
+    #member(Grille, "rechercherGrilleJouee(int)")
+    -float("getCalculatedGain(float, int)")
+    -int("getCorrespondingNumbers(int[], int[])")
+    -member("int[]", "generateRandomNumbers()")
 }
 
 class SuperTolo {
+    +{static} int(LOWER_LUCK_NUMBER)
+    +{static} int(UPPER_LUCK_NUMBER)
     -int(numeroChance)
+
+    +float("obtenirGain(SuperGrille)")
     +void("effectuerTirage()")
     +int("obtenirGain(SuperGrille)")
+    +void("setNumeroChance(int)")
 }
 
 extends(SuperTolo, Tolo, up)
 extends(SuperGrille, Grille, up)
+extends(SuperGrilleValidator, GrilleValidator, up)
+
+Grille ..> GrilleValidator : <<use>>
+Tolo ..> GrilleValidator : <<use>>
+SuperGrille ..> SuperGrilleValidator : <<use>>
+SuperTolo ..> SuperGrilleValidator : <<use>>
 
 Tolo *-right- "0..*" Grille : list(Grille, grillesJouees)
 

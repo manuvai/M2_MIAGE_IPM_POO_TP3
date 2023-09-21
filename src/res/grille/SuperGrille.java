@@ -1,10 +1,10 @@
 package res.grille;
 
-import res.exceptions.InvalidLuckNumberOuterBoundException;
-import res.tolo.SuperTolo;
+import res.validator.SuperGrilleValidator;
 
 public class SuperGrille extends Grille {
     private int numeroChance;
+    private SuperGrilleValidator superGrilleValidator = new SuperGrilleValidator();
 
     public SuperGrille(int code, float mise, int[] nombresMises, int inNumeroChance) {
         super(code, mise, nombresMises);
@@ -13,9 +13,7 @@ public class SuperGrille extends Grille {
     }
 
     private void setNumeroChance(int inNumeroChance) {
-        if (inNumeroChance < SuperTolo.LOWER_LUCK_NUMBER || inNumeroChance > SuperTolo.UPPER_LUCK_NUMBER) {
-            throw new InvalidLuckNumberOuterBoundException();
-        }
+        superGrilleValidator.checkNumeroChance(inNumeroChance);
         numeroChance = inNumeroChance;
     }
 

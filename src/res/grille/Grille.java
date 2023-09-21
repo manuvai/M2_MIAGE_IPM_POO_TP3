@@ -1,10 +1,7 @@
 package res.grille;
 
 import res.exceptions.InvalidEntryException;
-import res.exceptions.InvalidGridOuterBoundException;
-import res.exceptions.LimitedGridLengthException;
-import res.exceptions.MultipleOccuredNumberException;
-import res.tolo.Tolo;
+import res.validator.GrilleValidator;
 
 import java.util.Objects;
 
@@ -12,6 +9,8 @@ public class Grille {
     protected int code;
     protected float mise;
     protected int[] nombresMises;
+
+    private GrilleValidator grilleValidator = new GrilleValidator();
 
     public Grille(int code, float mise, int[] nombresMises) {
         this.code = code;
@@ -24,34 +23,11 @@ public class Grille {
             throw new InvalidEntryException();
         }
 
-        checkEntry(inNombresMises);
+        grilleValidator.checkEntry(inNombresMises);
         nombresMises = inNombresMises;
     }
 
-    private void checkEntry(int[] inNombres) {
-        // Contrôle du nombre de numéros fournis
-        if (inNombres.length != Tolo.PERMITTED_NUMBERS) {
-            throw new LimitedGridLengthException();
-        }
 
-        // Contrôle de la valeur des numéros
-        for (int nombre : inNombres) {
-            if (nombre > Tolo.UPPER_BOUND || nombre < Tolo.LOWER_BOUND) {
-                throw new InvalidGridOuterBoundException();
-            }
-        }
-
-        // Contrôle de l'occurence des numéros
-        int[] occurences = new int[Tolo.UPPER_BOUND + 1];
-
-        for (int nombre : inNombres) {
-            occurences[nombre]++;
-
-            if (occurences[nombre] > 1) {
-                throw new MultipleOccuredNumberException();
-            }
-        }
-    }
 
     public float getMise() {
         return mise;
